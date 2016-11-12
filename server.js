@@ -19,7 +19,9 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
+
+
 
 /**********
  * ROUTES *
@@ -48,14 +50,60 @@ app.get('/api', function api_index(req, res) {
     woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    baseUrl: "http://enigmatic-lowlands-94475.herokuapp.com", // CHANGE ME
     endpoints: [
+      //done
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      //done
+      {method: "GET", path: "/api/profile", description: "My info"},
+      //done
+      {method: "GET", path: "/api/projects", description: "My projects"},
+      //done
+      {method: "POST", path: "/api/projects", description: "Leave your feedback"},
+      {method: "GET", path: "/api/projects?best=NUMER", description: "Show top NUMBER of my projects"},
+      {method: "GET", path: "/api/projects/search?technology=Javascript/HTML/CSS/...", description: "Find projects by technologies used in it"},
+      {method: "POST", path: "/api/rate", description: "Rate my project"}
     ]
   })
 });
+
+app.get('/api/profile', function(req, res){
+  db.Project.find({}, function(err, p){
+    if(err){return console.log(err)};
+    res.json({
+      name: "Vladyslav Kuliani",
+      githubLink: "https://github.com/vladyslavkuliani",
+      personalSiteLink: "https://vladyslavkuliani.github.io/",
+      age: "22",
+      projects: p
+    });
+  });
+});
+
+app.get('/api/projects', function(req, res){
+  db.Project.find({}, function(err, p){
+    if(err){return console.log(err)};
+    res.json({
+      projects: p
+    });
+  });
+});
+
+app.post('/api/projects', function(req, res){
+  db.Project.findOne({name: req.body.project}, function(err, p){
+    if(err){return console.log(err);}
+    p.feedback.unshift(req.body.feedback);
+    p.save();
+  });
+
+  db.Project.find({}, function(err, p){
+    if(err){return console.log(err)};
+    res.json({
+      projects: p
+    });
+  });
+});
+
 
 /**********
  * SERVER *
