@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var ProjectSchema = Schema({
   name: String,
+  description: String,
   githubLink: String,
   feedback: [String],
   rating: Number,

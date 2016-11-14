@@ -60,8 +60,9 @@ app.get('/api', function api_index(req, res) {
       {method: "GET", path: "/api/projects", description: "My projects"},
       //done
       {method: "POST", path: "/api/projects", description: "Leave your feedback"},
-      {method: "GET", path: "/api/projects?best=NUMER", description: "Show top NUMBER of my projects"},
+      //done
       {method: "GET", path: "/api/projects/search?technology=Javascript/HTML/CSS/...", description: "Find projects by technologies used in it"},
+      //done
       {method: "POST", path: "/api/rate", description: "Rate my project"}
     ]
   })
@@ -83,9 +84,9 @@ app.get('/api/profile', function(req, res){
 app.get('/api/projects', function(req, res){
   db.Project.find({}, function(err, p){
     if(err){return console.log(err)};
-    res.json({
+    res.json([{
       projects: p
-    });
+    }]);
   });
 });
 
@@ -104,6 +105,32 @@ app.post('/api/projects', function(req, res){
   });
 });
 
+app.get('/api/projects/search', function(req, res){
+  db.Project.find({technology: req.query.technology}, function(err, projects){
+    if(err){return console.log(err);}
+    res.json(projects);
+  });
+});
+
+
+app.post('/api/rate', function(req, res){
+  var average=0;
+  console.log(req.body.project);
+  db.Project.findOne({name: req.body.project}, function(err, project){
+    if(err){return console.log(err);}
+    db.Rating.findOne({_id:project._id}, function(err, rating){
+      if(err){return console.log(err);}
+      rating.votes.unshift(req.body.rating);
+
+      for(var i=0; i<rating.votes.length; i++){
+        average+=rating.votes[i];
+      }
+      average/= rating.votes.length;
+    });
+    project.rating = average;
+    res.json(project);
+    });
+  });
 
 /**********
  * SERVER *

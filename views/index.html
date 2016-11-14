@@ -18,19 +18,55 @@
     <script src="/scripts/app.js"></script>
   </head>
   <body>
+    <div class="header"><h1 id="topH1"><a href="/api">My API Documentation</a></h1></div>
     <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
-          <h4><a href="/api">Read My API Documentation</a></h4>
-        </div>
+      <div class="row"><h1 id="myProjectsH1">My Projects</h1></div>
+      <div class="row projects">
+        <script class="deliverables-list" type="text/x-handlebars-template">
+          {{#each pr}}
+          <div class="col-md-8 col-md-offset-2 deliverables">
+            <div class="row">
+              <div class="col-md-9">
+                <h2 class="inBlockText">{{name}}</h2>
+                <h4 class="inBlockText">{{description}}</h4>
+              </div>
+              <div class="stars col-md-3">
+                <form class="rating">
+                  <input type="hidden" name="rating" value="0"/>
+                  <input type="hidden" name="project" value={{_id}}/>
+                  <span class="star1">&#9734</span>
+                  <span class="star2">&#9734</span>
+                  <span class="star3">&#9734</span>
+                  <span class="star4">&#9734</span>
+                  <span class="star5">&#9734</span>
+                </form>
+                <!-- <p class="r"></p> -->
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-8 split">
+                <p class="col-md-10 col-md-offset-1">Feedbacks:</p>
+                <input class="feedback col-md-10 col-md-offset-1" type="text" readonly/>
+              </div>
+              <div class="col-md-4">
+                <form class="projectsForm">
+                  <p>Leave feedback:</p>
+                  <input type="hidden" name="project" value={{name}}/>
+                  <input type="text" name="feedback"/>
+                  <input type="submit" value="Post Feedback"/>
+                </form>
+              </div>
+            </div>
+            <hr>
+            <div class="row projectFooter">
+              <div class="col-md-8"><a href={{githubLink}} class="inBlockLink">Repository for this project</a></div>
+              <div class="col-md-4"><img src="assets/imgs/{{technology}}.png" class="inBlockImg"></div>
+          </div>
+          </div>
+          {{/each}}
+          </script>
       </div>
-      <form id="project1">
-        <input type="hidden" name="project" value="Racing Game"/>
-        <input type="text" name="feedback"/>
-        <input type="submit" value="add comment"/>
-        <h1 id="result"></h1>
-      </form>
-    </div>
+      </div>
   </body>
 </html>

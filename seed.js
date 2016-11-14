@@ -15,22 +15,25 @@ var db = require('./models');
 // })
 var projects_list = [{
   name: "Racing Game",
+  description: "Browser game based on knowledge received for 2 weeks at GA",
   githubLink: "https://github.com/vladyslavkuliani/Racing-Game",
-  feedback: [""],
+  feedback: [],
   rating: null,
   technology: "Javascript"
 },
 {
   name: "Tic Tac Toe",
+  description: "HW: browser tic-tac-toe with HTML, CSS, JS, jQuery, Bootstrap",
   githubLink: "https://github.com/vladyslavkuliani/Racing-Game",
-  feedback: [""],
+  feedback: [],
   rating: null,
   technology: "Javascript"
 },
 {
   name: "Geoquakes",
+  description: "Mashup of Google Maps + Earthquakes - jquery ajax lab",
   githubLink: "https://github.com/vladyslavkuliani/geoquakes",
-  feedback: [""],
+  feedback: [],
   rating: null,
   technology: "HTML"
 }
@@ -64,8 +67,8 @@ var feedback_list = [{
 }
 ];
 
-// db.Project.find({}, function(err, succ) {
-//   if(succ.length != projects_list.length){
+db.Project.find({}, function(err, succ) {
+if(succ.length != projects_list.length){
 db.Project.remove({}, function(err, projects){
   if(err){return console.log("error1");}
   db.Project.create(projects_list, function(err, p){
@@ -98,5 +101,7 @@ db.Project.remove({}, function(err, projects){
     });
   });
 });
+}
+});
 
-process.exit();
+// process.exit();

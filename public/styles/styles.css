@@ -1,10 +1,82 @@
 body {
-  color: #333;
   font-family: Helvetica, Arial, sans-serif;
-  background-color: skyblue; /* Sanity Check! */
+  background: url("http://img0.gtsstatic.com/wallpapers/804376dd93b2fe6eae299a4cf13d10ad_large.jpeg");
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
-h1 {
+.container{
+  width: 100%;
+  background: #FAE6DF;
+  margin-top: 800px;
+  z-index: 2;
+}
+
+#topH1 {
   margin-top: 100px;
+  text-align: right;
+  padding-right: 20px;
+}
+
+#myProjectsH1 {
   text-align: center;
+  font-size: 55px;
+  color:rgba(73,78,107, 1);
+}
+.description{
+  float:left;
+}
+
+.stars{
+  color: white;
+  font-size: 30px;
+  text-align: right;;
+}
+
+
+.deliverables{
+  background: #494E6B;
+  margin-bottom: 20px;
+}
+
+.inBlockText {
+  margin-left: 5%;
+  color: #DCCBD3;
+}
+
+.inBlockLink {
+  color: #CA91A0;
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.inBlockImg{
+  width: 35px;
+  height: 35px;
+  float: right;
+}
+
+.leftSide{
+  text-align: center;
+  margin-top: 40%;
+  border: 2px solid yellow;
+}
+
+.split{
+  border-right: 2px solid white;
+}
+
+.feedback{
+  height: 100px;
+  border-radius: 5px;
+}
+
+.projectFooter{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+a{
+  color: #FAE6DF;
 }
